@@ -32,7 +32,7 @@ firebase = pyrebase.initialize_app(firebaseConfig)
 fireb_auth = firebase.auth()
 db = firebase.database()
 fireb_email = "nguyentuyetrinh99@gmail.com"
-fireb_password = "wacompe571"
+fireb_password = "tuyettrinh123"
 fireb_user = fireb_auth.sign_in_with_email_and_password(fireb_email, fireb_password)
 
 storage = firebase.storage()
@@ -53,6 +53,14 @@ ap.add_argument("-c", "--confidence", type=float, default=0.5,
 args = vars(ap.parse_args())
 
 #convert object time to JSON format
+def get_url(self, token):
+    path = self.path
+    self.path = None
+    if path.startswith('/'):
+        path = path[1:]
+    if token:
+        return "{0}/o/{1}?alt=media&token={2}".format(self.storage_bucket, quote(path, safe=''), token)
+    return "{0}/o/{1}?alt=media".format(self.storage_bucket, quote(path, safe=''))
 def converttime(o):
   if isinstance(o, datetime.datetime):
         return o.__str__()
